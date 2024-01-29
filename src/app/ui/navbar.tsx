@@ -1,6 +1,7 @@
 // src/components/Navbar.tsx
 
 "use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBox,
@@ -87,6 +88,7 @@ const Navbar: React.FC = () => {
             <span className="text-yellow-400">S</span>natch
           </div>
         </Link>
+
         {/* Sign In/Sign Out Buttons (Mobile) */}
         <div className="flex items-center space-x-4">
           {status === "authenticated" ? (
@@ -94,6 +96,7 @@ const Navbar: React.FC = () => {
               className="flex items-center text-white hover:underline cursor-pointer border border-white rounded px-3 py-1 ml-2"
               onClick={() => signOut()}
             >
+
               <FontAwesomeIcon
                 icon={faSignOutAlt}
                 className="text-xl h-6 w-6 mr-1"
@@ -114,7 +117,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
       </div>
-
+ 
       {/* Bottom Bar (for mobile) */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-blue-500 p-2 flex justify-between">
         <Link href="/orders">
