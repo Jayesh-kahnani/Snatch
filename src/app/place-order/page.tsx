@@ -1,5 +1,4 @@
-"use client";
-import { getSession, useSession } from "next-auth/react";
+"use client"
 import { useState } from "react";
 
 export default function Page() {
@@ -14,39 +13,40 @@ export default function Page() {
       // Set the submitting state to true
       setSubmitting(true);
 
-      const session = await getSession();
-
-      const response = await fetch("/api/place-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, content }),
-      });
-      window.location.reload();
+      // Simulate a fetch request
+      setTimeout(() => {
+        // Reset the form fields
+        setTitle("");
+        setContent("");
+        // Reset the submitting state to false after the fetch completes
+        setSubmitting(false);
+        // Show a success message (you can implement this part as needed)
+        alert("Order submitted successfully!");
+      }, 2000); // Simulating a 2-second delay for the fetch request
     } catch (error) {
       console.error(error);
-    } finally {
-      // Reset the submitting state to false after the fetch completes
+      // Reset the submitting state to false if there's an error
       setSubmitting(false);
+      // Show an error message (you can implement this part as needed)
+      alert("Error submitting order. Please try again.");
     }
   };
 
   return (
     <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-bold mb-4 text-gray-100 text-center">
+      <h1 className="text-3xl font-bold mb-4 text-gray-800 text-center">
         Place Order
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto text-gray-600 bg-gray-100 p-8 rounded shadow-md"
+        className="max-w-md mx-auto text-gray-800 bg-gray-200 p-8 rounded shadow-md"
       >
         <div className="mb-4">
           <label
             htmlFor="title"
-            className="block text-gray-600 text-sm font-medium mb-2"
+            className="block text-gray-800 text-sm font-medium mb-2"
           >
-            Store from which you wanna order:
+            Store from which you want to order:
           </label>
           <input
             type="text"
@@ -61,7 +61,7 @@ export default function Page() {
         <div className="mb-6">
           <label
             htmlFor="content"
-            className="block text-gray-600 text-sm font-medium mb-2"
+            className="block text-gray-800 text-sm font-medium mb-2"
           >
             Describe your order as accurately as possible:
           </label>

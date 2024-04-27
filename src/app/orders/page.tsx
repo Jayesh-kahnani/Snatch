@@ -11,22 +11,25 @@ async function getPosts() {
 
   return posts;
 }
-
 export default async function Page() {
   const posts = await getPosts();
 
   return (
-    <>
-      <h1>Your orders</h1>
-      {posts.map((post) => (
-        <Post
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          content={post.content}
-          authorName={post.author?.name || "Unknown"}
-        />
-      ))}
-    </>
+    <div className="container mx-auto mt-8 px-4 sm:px-0 text-gray-600">
+      {" "}
+      {/* Set text color to black */}
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">Orders List</h1>
+      <div className="flex flex-wrap">
+        {posts.map((post) => (
+          <Post
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            content={post.content}
+            authorName={post.author?.name || "Unknown"}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

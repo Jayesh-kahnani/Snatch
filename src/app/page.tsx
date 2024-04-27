@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client"
-import { getUserInfo, UserInfo } from "@/lib/userUtils";
 import { SessionProvider, useSession } from "next-auth/react";
+import WebsiteDescription from "./ui/WebsiteDescription";
 
 export default function Home() {
   return (
@@ -13,12 +13,11 @@ export default function Home() {
 
 function Content() {
   const { data: session } = useSession();
-  const userInfo: UserInfo = getUserInfo(session);
+  const userInfo = session?.user ?? { name: "Guest" };
 
   return (
-    <h1>
-      Hii <i> {userInfo.name}.</i>
-      <br /> description here. 
-       </h1>
+    <>
+      <WebsiteDescription />
+    </>
   );
 }
