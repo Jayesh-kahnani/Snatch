@@ -1,12 +1,8 @@
 // src/app/api/place-order/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 
-interface CustomRequest {
-  json: () => Promise<any>;
-}
-
-export async function POST(request: CustomRequest) {
+export async function POST(request: NextRequest) {
   const res = await request.json();
   const { title, content } = res;
 
