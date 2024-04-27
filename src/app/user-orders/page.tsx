@@ -17,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await fetch("/api/orders"); // Adjust the API endpoint as per your backend setup
+        const response = await fetch("/api/order/route"); // Adjust the API endpoint as per your backend setup
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
