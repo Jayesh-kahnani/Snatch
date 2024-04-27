@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../lib/prisma";
 import { getSession } from "next-auth/react"; // Import getSession from next-auth/react
 
-export default async function handler(
+export default async function GET(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
