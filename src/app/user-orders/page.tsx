@@ -1,3 +1,4 @@
+// src/app/user-orders/page.tsx
 "use client"
 import { useState, useEffect } from "react";
 import Post from "../ui/order-list"; // Update import path
@@ -17,27 +18,28 @@ export default function Page() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await fetch("/api/order/route"); // Adjust the API endpoint as per your backend setup
+        const response = await fetch("/api/order/route"); // Fetch orders from the API endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
         const data = await response.json();
-        setOrders(data.orders);
-        setLoading(false);
+        setOrders(data.orders); // Set orders fetched from the API
+        setLoading(false); // Set loading state to false after fetching data
       } catch (error) {
         console.error("Error fetching orders:", error);
-        setError("Failed to fetch orders. Please try again later.");
-        setLoading(false);
+        setLoading(false); // Set loading state to false after fetching data
       }
     }
 
-    fetchOrders();
+    fetchOrders(); // Call the function to fetch orders when component mounts
   }, []);
 
+  // Display loading message while fetching data
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // Display error message if fetching orders fails
   if (error) {
     return <div>{error}</div>;
   }
@@ -45,9 +47,11 @@ export default function Page() {
   return (
     <div className="container mx-auto mt-8 px-4 sm:px-0 text-gray-600">
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Your Orders</h1>
+      {/* Display message if no orders found */}
       {orders.length === 0 ? (
         <div>No orders found.</div>
       ) : (
+        // Display orders if available
         <div className="flex flex-wrap">
           {orders.map((order) => (
             <Post
