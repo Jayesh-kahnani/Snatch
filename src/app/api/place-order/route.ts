@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       author: {
         create: {
           name: "name will be here",
-          email: "email will be here",
+          email: "email will be here"
         },
       },
     },
