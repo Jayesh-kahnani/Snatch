@@ -1,6 +1,6 @@
-"use client"
 import { useState, useEffect } from "react";
 import Post from "../ui/order-list"; // Update import path
+import prisma from "../../../lib/prisma";
 
 interface Order {
   id: string;
@@ -17,16 +17,16 @@ export default function Page() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const response = await fetch("/api/orders");
+        const response = await fetch("/api/orders"); // Adjust the API endpoint as per your backend setup
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
         const data = await response.json();
         setOrders(data.orders);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
         setError("Failed to fetch orders. Please try again later.");
-      } finally {
         setLoading(false);
       }
     }
