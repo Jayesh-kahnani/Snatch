@@ -1,6 +1,6 @@
+"use client"
 import { useState, useEffect } from "react";
 import Post from "../ui/order-list"; // Update import path
-import prisma from "../../../lib/prisma";
 
 interface Order {
   id: string;
