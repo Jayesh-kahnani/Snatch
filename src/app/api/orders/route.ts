@@ -1,22 +1,33 @@
-// pages/api/orders/route.ts
+// src/app/api/orders/route.ts
 
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../lib/prisma";
+import { getSession } from "next-auth/react"; // Import getSession from next-auth/react
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
+    const session = await getSession({ req }); // Get the session object from the request
+
+    if (!session) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     if (req.method !== "GET") {
       return res.status(405).json({ error: "Method Not Allowed" });
     }
 
-    // Assuming you have a user ID associated with the orders
-    const userId = "user_id"; // Replace "user_id" with the actual user ID
+    const userId = session.user?.email; // Get the user's email from the session
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID not found in session" });
+    }
+
     const orders = await prisma.post.findMany({
       where: {
-        authorId: userId,
+        author: { email: userId }, // Filter orders by user's email
         published: true, // Filter based on your criteria
       },
       include: {
