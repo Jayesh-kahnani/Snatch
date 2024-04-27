@@ -1,6 +1,6 @@
-// src/app/api/order.ts
+// src/app/api/order/route.ts
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "./../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 import { getSession } from "next-auth/react"; // Import getSession from next-auth/react
 
 export default async function handler(
