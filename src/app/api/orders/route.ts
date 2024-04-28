@@ -1,9 +1,10 @@
 // src/app/api/orders/route.ts
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse, NextRequest } from 'next/server'
+ 
 import prisma from "../../../../lib/prisma";
 import { getSession } from "next-auth/react";
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export async function GET(request: NextRequest) {
   try {
     const session = await getSession({ req });
 
