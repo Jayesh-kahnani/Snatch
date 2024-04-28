@@ -1,25 +1,22 @@
-// src/app/api/orders/route.ts
-import { NextResponse, NextRequest } from 'next/server'
- 
-import prisma from "../../../../lib/prisma";
+import { NextResponse, NextRequest } from "next/server";
+import prisma from "../../../../lib/prisma"
 import { getSession } from "next-auth/react";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getSession({ req });
+    const session = await getSession({ req: request });
 
     if (!session) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    if (req.method !== "GET") {
-      return res.status(405).json({ error: "Method Not Allowed" });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const userId = session.user?.email;
 
     if (!userId) {
-      return res.status(400).json({ error: "User ID not found in session" });
+      return NextResponse.json(
+        { error: "User ID not found in session" },
+        { status: 400 }
+      );
     }
 
     const orders = await prisma.post.findMany({
@@ -32,9 +29,12 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    res.status(200).json({ orders });
+    return NextResponse.json({ orders });
   } catch (error) {
     console.error("Error fetching orders:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
-};
+}
