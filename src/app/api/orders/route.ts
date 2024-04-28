@@ -1,3 +1,4 @@
+// src/app/api/orders/route.ts
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../lib/prisma";
 import { getSession } from "next-auth/react";
